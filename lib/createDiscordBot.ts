@@ -2,7 +2,7 @@ import { Client, ClientOptions, Interaction, Message } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { Routes } from 'discord-api-types/v9';
-import { Command, Controller, ControllerConfig } from '../types';
+import { Command, Controller, ControllerAction, ControllerConfig } from '../types';
 
 export interface CreateDiscordBotConfig {
   clientOptions: ClientOptions;
@@ -59,10 +59,19 @@ export const createDiscordBot = async (config: CreateDiscordBotConfig): Promise<
     }
 
     config.controllers?.forEach((controller: Controller) => {
-      const command = `${config.controllerConfig?.prefix ?? ''}${controller.command}`;
+      const literalRegex = /[{}]/g;
+      const [literal, literalVariable] = controller.command.split(literalRegex).filter(Boolean);
+      const command = `${config.controllerConfig?.prefix ?? ''}${literal}`.trim();
+      const splitContent = message.content.split(' ');
 
-      if (command === message.content) {
-        controller.action?.(message);
+      if (command.split(' ').every((v, i) => splitContent[i] === v)) {
+        controller.action?.({
+          message,
+          client,
+          variables: {
+            [literalVariable]: message.content.replace(command, '').trim(),
+          },
+        } as ControllerAction);
       }
     });
   });

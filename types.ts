@@ -1,4 +1,4 @@
-import { Interaction, Message } from 'discord.js';
+import { Client, Interaction, Message } from 'discord.js';
 
 export interface Command {
   name: string;
@@ -11,8 +11,18 @@ export interface ControllerConfig {
   helpTitle?: string;
 }
 
+export interface ControllerActionVariables {
+  [K: string]: string | null | undefined;
+}
+
+export interface ControllerAction {
+  client: Client;
+  message: Message;
+  variables: ControllerActionVariables;
+}
+
 export interface Controller {
   command: string;
   description?: string;
-  action?: (message: Message) => any;
+  action?: (controllerAction: ControllerAction) => any;
 }
