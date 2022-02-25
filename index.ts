@@ -1,3 +1,3 @@
-import createDiscrodBot from './createDiscrodBot';
+import createDiscrodBot from './lib/createDiscrodBot';
 
 export { createDiscrodBot };

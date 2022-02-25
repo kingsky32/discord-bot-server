@@ -2,7 +2,7 @@ import { Client, Interaction, Message } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { Routes } from 'discord-api-types/v9';
-import { CreateDiscordBotConfig, Command, Controller } from './@types/index';
+import { CreateDiscordBotConfig, Command, Controller } from '../@types';
 
 const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
   const client = new Client(config?.clientOptions);
