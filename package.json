@@ -1,6 +1,6 @@
 {
   "name": "discord-bot-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "dicord-bot-server",
   "main": "dist/index.js",
   "repository": "https://github.com/kingsky32/discord-bot-server",
