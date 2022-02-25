@@ -1,10 +1,19 @@
-import { Client, Interaction, Message } from 'discord.js';
+import { Client, ClientOptions, Interaction, Message } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { Routes } from 'discord-api-types/v9';
-import { CreateDiscordBotConfig, Command, Controller } from '../@types';
+import { Command, Controller, ControllerConfig } from '../types';
 
-const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
+export interface CreateDiscordBotConfig {
+  clientOptions: ClientOptions;
+  token: string;
+  clientId: string;
+  commands?: Command[];
+  controllerConfig?: ControllerConfig;
+  controllers?: Controller[];
+}
+
+export const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
   const client = new Client(config?.clientOptions);
   const commands = config.commands?.map((command: Command) =>
     new SlashCommandBuilder()

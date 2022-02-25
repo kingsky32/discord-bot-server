@@ -1,9 +1,9 @@
 {
   "name": "discord-bot-server",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "dicord-bot-server",
   "main": "./index.js",
-  "types": "./index.d.ts",
+  "types": "./@types/index.d.ts",
   "repository": "https://github.com/kingsky32/discord-bot-server",
   "author": {
     "name": "Seung Ju",

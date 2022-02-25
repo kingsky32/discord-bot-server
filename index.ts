@@ -1,2 +1,2 @@
-import createDiscordBot from './lib/createDiscrodBot';
-export default { createDiscordBot };
+export * from 'types';
+export { createDiscrodBot } from './lib/createDiscrodBot';
