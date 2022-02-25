@@ -1,4 +1,4 @@
-import { ClientOptions, Interaction, Message } from "discord.js";
+import { ClientOptions, Interaction, Message } from 'discord.js';
 
 export interface Command {
   name: string;
@@ -25,4 +25,3 @@ export interface CreateDiscordBotConfig {
   controllerConfig?: ControllerConfig;
   controllers?: Controller[];
 }
-

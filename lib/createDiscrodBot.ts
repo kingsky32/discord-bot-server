@@ -4,7 +4,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { Routes } from 'discord-api-types/v9';
 import { CreateDiscordBotConfig, Command, Controller } from '../@types';
 
-const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
+export const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
   const client = new Client(config?.clientOptions);
   const commands = config.commands?.map((command: Command) =>
     new SlashCommandBuilder()
@@ -59,5 +59,3 @@ const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
 
   await client.login(config.token);
 };
-
-export default createDiscrodBot;
