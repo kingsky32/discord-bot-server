@@ -9,9 +9,12 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createDiscordBot = void 0;
+const DiscordBot_1 = __importDefault(require("./lib/DiscordBot"));
 __exportStar(require("./types"), exports);
 __exportStar(require("discord.js"), exports);
-var createDiscordBot_1 = require("./lib/createDiscordBot");
-Object.defineProperty(exports, "createDiscordBot", { enumerable: true, get: function () { return createDiscordBot_1.createDiscordBot; } });
+__exportStar(require("./lib/createDiscordBot"), exports);
+exports.default = DiscordBot_1.default;
