@@ -1,2 +1,3 @@
 import { CreateDiscordBotConfig } from '../@types';
-export declare const createDiscrodBot: (config: CreateDiscordBotConfig) => Promise<void>;
+declare const createDiscrodBot: (config: CreateDiscordBotConfig) => Promise<void>;
+export default createDiscrodBot;
