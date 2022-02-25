@@ -65,7 +65,7 @@ class DiscordBot {
         message.channel.send(this.helpTemplate);
       }
 
-      options.controllers?.forEach((controller: Controller) => {
+      options.controllers?.forEach((controller: Controller): void => {
         const literalRegex = /[{}]/g;
         const [literal, literalVariable] = controller.command.split(literalRegex).filter(Boolean);
         const command = `${options.controllerConfig?.prefix ?? ''}${literal}`.trim();

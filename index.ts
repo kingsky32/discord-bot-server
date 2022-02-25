@@ -1,7 +1,8 @@
 import DiscordBot from './lib/DiscordBot';
+import createDiscordBot from './lib/createDiscordBot';
 
 export * from './types';
 export * from 'discord.js';
-export * from './lib/createDiscordBot';
+export { createDiscordBot };
 
 export default DiscordBot;

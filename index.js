@@ -13,8 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createDiscordBot = void 0;
 const DiscordBot_1 = __importDefault(require("./lib/DiscordBot"));
+const createDiscordBot_1 = __importDefault(require("./lib/createDiscordBot"));
+exports.createDiscordBot = createDiscordBot_1.default;
 __exportStar(require("./types"), exports);
 __exportStar(require("discord.js"), exports);
-__exportStar(require("./lib/createDiscordBot"), exports);
 exports.default = DiscordBot_1.default;
