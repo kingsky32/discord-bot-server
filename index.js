@@ -12,5 +12,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDiscordBot = void 0;
 __exportStar(require("./types"), exports);
+__exportStar(require("discord.js"), exports);
 var createDiscordBot_1 = require("./lib/createDiscordBot");
 Object.defineProperty(exports, "createDiscordBot", { enumerable: true, get: function () { return createDiscordBot_1.createDiscordBot; } });

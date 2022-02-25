@@ -13,7 +13,7 @@ export interface CreateDiscordBotConfig {
   controllers?: Controller[];
 }
 
-export const createDiscordBot = async (config: CreateDiscordBotConfig) => {
+export const createDiscordBot = async (config: CreateDiscordBotConfig): Promise<void> => {
   const client = new Client(config?.clientOptions);
   const commands = config.commands?.map((command: Command) =>
     new SlashCommandBuilder()
@@ -21,14 +21,15 @@ export const createDiscordBot = async (config: CreateDiscordBotConfig) => {
       .setDescription(command.description ?? '')
       .toJSON(),
   );
-  let helpTemplete = config.controllerConfig?.helpTitle ?? '';
-  config.controllers?.forEach((controller: Controller) => {
-    helpTemplete += `\n ${config.controllerConfig?.prefix ?? ''}${controller.command} - ${controller.description}`;
+
+  let helpTemplate: String = config.controllerConfig?.helpTitle ?? '';
+  config.controllers?.forEach((controller: Controller): void => {
+    helpTemplate += `\n ${config.controllerConfig?.prefix ?? ''}${controller.command} - ${controller.description}`;
   });
 
-  const rest = new REST({ version: '9' }).setToken(config.token);
+  const rest: REST = new REST({ version: '9' }).setToken(config.token);
 
-  client.on('ready', (client: Client) => {
+  client.on('ready', (client: Client): void => {
     client.guilds.cache.forEach(async ({ id }) => {
       await rest.put(Routes.applicationGuildCommands(config.clientId, id), {
         body: commands,
@@ -36,7 +37,7 @@ export const createDiscordBot = async (config: CreateDiscordBotConfig) => {
     });
   });
 
-  client.on('interactionCreate', async (interaction: Interaction) => {
+  client.on('interactionCreate', async (interaction: Interaction): Promise<void> => {
     if (!interaction.isCommand()) return;
 
     const actionCommand: Command | undefined = config.commands?.find(
@@ -48,13 +49,13 @@ export const createDiscordBot = async (config: CreateDiscordBotConfig) => {
     }
   });
 
-  client.on('message', (message: Message) => {
+  client.on('message', (message: Message): void => {
     if (message.author.bot) return;
 
-    const command = `${config.controllerConfig?.prefix ?? ''}help`;
+    const helpCommand = `${config.controllerConfig?.prefix ?? ''}help`;
 
-    if (message.content === command) {
-      message.channel.send(helpTemplete);
+    if (message.content === helpCommand) {
+      message.channel.send(helpTemplate);
     }
 
     config.controllers?.forEach((controller: Controller) => {
