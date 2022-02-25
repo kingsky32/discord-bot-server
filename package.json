@@ -1,6 +1,6 @@
 {
   "name": "discord-bot-server",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "dicord-bot-server",
   "main": "./index.js",
   "types": "./index.d.ts",
