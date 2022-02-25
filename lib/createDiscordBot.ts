@@ -22,7 +22,7 @@ export const createDiscordBot = async (config: CreateDiscordBotConfig): Promise<
       .toJSON(),
   );
 
-  let helpTemplate: String = config.controllerConfig?.helpTitle ?? '';
+  let helpTemplate: string = config.controllerConfig?.helpTitle ?? '';
   config.controllers?.forEach((controller: Controller): void => {
     helpTemplate += `\n ${config.controllerConfig?.prefix ?? ''}${controller.command} - ${controller.description}`;
   });
