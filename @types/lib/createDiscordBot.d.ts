@@ -8,5 +8,5 @@ export interface CreateDiscordBotConfig {
     controllerConfig?: ControllerConfig;
     controllers?: Controller[];
 }
-export declare const createDiscrodBot: (config: CreateDiscordBotConfig) => Promise<void>;
-export default createDiscrodBot;
+export declare const createDiscordBot: (config: CreateDiscordBotConfig) => Promise<void>;
+export default createDiscordBot;

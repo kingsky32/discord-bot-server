@@ -10,7 +10,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createDiscrodBot = void 0;
+exports.createDiscordBot = void 0;
 __exportStar(require("./types"), exports);
-var createDiscrodBot_1 = require("./lib/createDiscrodBot");
-Object.defineProperty(exports, "createDiscrodBot", { enumerable: true, get: function () { return createDiscrodBot_1.createDiscrodBot; } });
+var createDiscordBot_1 = require("./lib/createDiscordBot");
+Object.defineProperty(exports, "createDiscordBot", { enumerable: true, get: function () { return createDiscordBot_1.createDiscordBot; } });

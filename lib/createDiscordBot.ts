@@ -13,7 +13,7 @@ export interface CreateDiscordBotConfig {
   controllers?: Controller[];
 }
 
-export const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
+export const createDiscordBot = async (config: CreateDiscordBotConfig) => {
   const client = new Client(config?.clientOptions);
   const commands = config.commands?.map((command: Command) =>
     new SlashCommandBuilder()
@@ -69,4 +69,4 @@ export const createDiscrodBot = async (config: CreateDiscordBotConfig) => {
   await client.login(config.token);
 };
 
-export default createDiscrodBot;
+export default createDiscordBot;

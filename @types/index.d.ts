@@ -1,2 +1,2 @@
 export * from './types';
-export { createDiscrodBot } from './lib/createDiscrodBot';
+export { createDiscordBot } from './lib/createDiscordBot';
