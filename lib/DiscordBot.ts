@@ -1,5 +1,5 @@
 import { Client, ClientOptions, Interaction, Message } from 'discord.js';
-import { Command, Controller, ControllerAction, ControllerConfig } from '../types';
+import { Command, Controller, ControllerAction, ControllerConfig, Servers } from '../types';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { SlashCommandBuilder } from '@discordjs/builders';
@@ -37,6 +37,7 @@ class DiscordBot {
     this.rest = new REST({ version: '9' }).setToken(options.token);
 
     this.client.on('ready', (client: Client): void => {
+      this.servers = client.guilds.cache.reduce((p, guild) => ({ ...p, [guild.id]: guild }), {});
       client.guilds.cache.forEach(async ({ id }) => {
         await this.rest.put(Routes.applicationGuildCommands(options.clientId, id), {
           body: this.commands,
@@ -75,6 +76,7 @@ class DiscordBot {
           controller.action?.({
             message,
             client: this.client,
+            servers: this.servers,
             variables: {
               [literalVariable]: message.content.replace(command, '').trim(),
             },
@@ -89,6 +91,7 @@ class DiscordBot {
   commands: BodyInit | unknown;
   helpTemplate: string;
   rest: REST;
+  servers: Servers = {};
 }
 
 export default DiscordBot;

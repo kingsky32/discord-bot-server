@@ -1,4 +1,4 @@
-import { Client, Interaction, Message } from 'discord.js';
+import { Client, Guild, Interaction, Message } from 'discord.js';
 
 export interface Command {
   name: string;
@@ -17,6 +17,7 @@ export interface ControllerActionVariables {
 
 export interface ControllerAction {
   client: Client;
+  servers: Servers;
   message: Message;
   variables: ControllerActionVariables;
 }
@@ -25,4 +26,10 @@ export interface Controller {
   command: string;
   description?: string;
   action?: (controllerAction: ControllerAction) => any;
+}
+
+export interface Server extends Guild {}
+
+export interface Servers {
+  [k: string]: Server;
 }

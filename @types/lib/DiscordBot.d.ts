@@ -1,5 +1,5 @@
 import { Client, ClientOptions } from 'discord.js';
-import { Command, Controller, ControllerConfig } from '../types';
+import { Command, Controller, ControllerConfig, Servers } from '../types';
 import { REST } from '@discordjs/rest';
 import { BodyInit } from 'node-fetch';
 export interface DiscordBotOptions {
@@ -17,5 +17,6 @@ declare class DiscordBot {
     commands: BodyInit | unknown;
     helpTemplate: string;
     rest: REST;
+    servers: Servers;
 }
 export default DiscordBot;
