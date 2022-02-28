@@ -12,6 +12,8 @@ export interface DiscordBotOptions {
   commands?: Command[];
   controllerConfig?: ControllerConfig;
   controllers?: Controller[];
+  onInit?: (client: Client) => {};
+  onReady?: (client: Client) => {};
 }
 
 class DiscordBot {
@@ -43,6 +45,7 @@ class DiscordBot {
           body: this.commands,
         });
       });
+      if (typeof this.options.onReady === 'function') this.options.onReady(client);
     });
 
     this.client.on('interactionCreate', async (interaction: Interaction): Promise<void> => {
@@ -84,6 +87,8 @@ class DiscordBot {
         }
       });
     });
+
+    if (typeof this.options.onInit === 'function') this.options.onInit(this.client);
   }
 
   options: DiscordBotOptions;

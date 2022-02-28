@@ -9,6 +9,8 @@ export interface DiscordBotOptions {
     commands?: Command[];
     controllerConfig?: ControllerConfig;
     controllers?: Controller[];
+    onInit?: (client: Client) => {};
+    onReady?: (client: Client) => {};
 }
 declare class DiscordBot {
     constructor(options: DiscordBotOptions);
