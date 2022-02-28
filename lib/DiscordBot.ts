@@ -12,8 +12,8 @@ export interface DiscordBotOptions {
   commands?: Command[];
   controllerConfig?: ControllerConfig;
   controllers?: Controller[];
-  onInit?: (client: Client) => {};
-  onReady?: (client: Client) => {};
+  onInit?: (client: Client) => any;
+  onReady?: (client: Client) => any;
 }
 
 class DiscordBot {
