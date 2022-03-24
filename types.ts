@@ -23,7 +23,7 @@ export interface ControllerAction {
 }
 
 export interface Controller {
-  command: string;
+  command: string | string[];
   description?: string;
   action?: (controllerAction: ControllerAction) => any;
 }

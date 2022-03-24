@@ -23,17 +23,14 @@ class DiscordBot {
     this.client = new Client(this.options.clientOptions);
 
     this.commands = options.commands?.map((command: Command) =>
-      new SlashCommandBuilder()
-        .setName(command.name)
-        .setDescription(command.description ?? '')
-        .toJSON(),
+      new SlashCommandBuilder().setName(command.name).setDescription(command.description).toJSON(),
     );
 
     this.helpTemplate = options.controllerConfig?.helpTitle ?? '';
     options.controllers?.forEach((controller: Controller): void => {
-      this.helpTemplate += `\n ${options.controllerConfig?.prefix ?? ''}${controller.command} - ${
-        controller.description
-      }`;
+      this.helpTemplate += `\n ${options.controllerConfig?.prefix ?? ''}${
+        Array.isArray(controller.command) ? `[${controller.command.join(', ')}]` : controller.command
+      } - ${controller.description}`;
     });
 
     this.rest = new REST({ version: '9' }).setToken(options.token);
@@ -71,19 +68,30 @@ class DiscordBot {
 
       options.controllers?.forEach((controller: Controller): void => {
         const literalRegex = /[{}]/g;
-        const [literal, literalVariable] = controller.command.split(literalRegex).filter(Boolean);
-        const command = `${options.controllerConfig?.prefix ?? ''}${literal}`.trim();
-        const splitContent = message.content.split(' ');
 
-        if (command.split(' ').every((v, i) => splitContent[i] === v)) {
-          controller.action?.({
-            message,
-            client: this.client,
-            servers: this.servers,
-            variables: {
-              [literalVariable]: message.content.replace(command, '').trim(),
-            },
-          } as ControllerAction);
+        function callback(command: string, client: Client, servers: Servers) {
+          const [literal, literalVariable] = command.split(literalRegex).filter(Boolean);
+          const _command = `${options.controllerConfig?.prefix ?? ''}${literal}`.trim();
+          const splitContent = message.content.split(' ');
+
+          if (_command.split(' ').every((v, i) => splitContent[i] === v)) {
+            controller.action?.({
+              message,
+              client,
+              servers,
+              variables: {
+                [literalVariable]: message.content.replace(_command, '').trim(),
+              },
+            } as ControllerAction);
+          }
+        }
+
+        if (Array.isArray(controller.command)) {
+          controller.command.forEach((command) => {
+            callback(command, this.client, this.servers);
+          });
+        } else {
+          callback(controller.command, this.client, this.servers);
         }
       });
     });

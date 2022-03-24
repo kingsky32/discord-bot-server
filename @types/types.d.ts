@@ -18,7 +18,7 @@ export interface ControllerAction {
     variables: ControllerActionVariables;
 }
 export interface Controller {
-    command: string;
+    command: string | string[];
     description?: string;
     action?: (controllerAction: ControllerAction) => any;
 }
